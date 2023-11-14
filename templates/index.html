@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrospective App</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="index-body">
+    <div class="container">
+        <h1>Welcome to the Sprint Retrospective App</h1>
+        <form action="/create_board" method="post">
+            <div class="form-group">
+                <label for="retroType">Choose a retrospective type:</label>
+                <select name="retroType" id="retroType" class="form-control">
+                    <option value="whatWentWell">4-Step Retrospective</option>
+                    <option value="startStopContinue">Start Stop Continue</option>
+                    <option value="plusDelta">Plus Delta</option>
+                    <option value="starfish">Starfish</option>
+                    <option value="sailboat">SAILBOAT</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="teamSize">Team Size:</label>
+                <input type="number" id="teamSize" name="teamSize" min="1" required>
+            </div>
+            <button type="submit">Create Board</button>
+        </form>
+    </div>
+</body>
+</html>

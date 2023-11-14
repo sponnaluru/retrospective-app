@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrospective Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="board-description">
+        <h2>The 4-step Retrospective</h2>
+        <p>This retrospective board is divided into four sections, each representing a different area of focus:</p>
+        <ul>
+            <li><strong>Let's appreciate others:</strong> Acknowledge the hard work and achievements of your teammates.</li>
+            <li><strong>What went well?:</strong> Discuss what worked well during the last sprint and why.</li>
+            <li><strong>What can we do better?:</strong> Identify any challenges faced and how they can be improved.</li>
+            <li><strong>Actions for next sprint:</strong> Decide on actionable items that the team agrees to implement in the next sprint.</li>
+        </ul>
+        <p>Click on a section to add a sticky note with your comments. You can drag and position the sticky notes anywhere within the section.</p>
+    </div>
+    <!-- The retro-board div follows here -->
+
+    <div class="retro-board">
+        <div class="retro-section" id="appreciate">
+            <h2>Let's appreciate others</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('appreciate')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="went-well">
+            <h2>What went well?</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('went-well')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="do-better">
+            <h2>What can we do better?</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('do-better')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="next-actions">
+            <h2>Actions for next sprint</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('next-actions')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script>
+        window.onload = function() {
+            enableDropZones();
+            // Other initialization code can go here
+        };
+    </script>
+</body>
+
+</html>
