@@ -17,6 +17,7 @@ executing==2.0.0
 Flask==3.0.0
 Flask-SocketIO==5.3.6
 fonttools==4.43.1
+gunicorn==21.2.0
 h11==0.14.0
 importlib-metadata==6.8.0
 importlib-resources==6.1.0
