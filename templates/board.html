@@ -13,12 +13,16 @@
         <h2>The 4-step Retrospective</h2>
         <p>This retrospective board is divided into four sections, each representing a different area of focus:</p>
         <ul>
-            <li><strong>Let's appreciate others:</strong> Acknowledge the hard work and achievements of your teammates.</li>
+            <li><strong>Let's appreciate others:</strong> Acknowledge the hard work and achievements of your teammates.
+            </li>
             <li><strong>What went well?:</strong> Discuss what worked well during the last sprint and why.</li>
-            <li><strong>What can we do better?:</strong> Identify any challenges faced and how they can be improved.</li>
-            <li><strong>Actions for next sprint:</strong> Decide on actionable items that the team agrees to implement in the next sprint.</li>
+            <li><strong>What can we do better?:</strong> Identify any challenges faced and how they can be improved.
+            </li>
+            <li><strong>Actions for next sprint:</strong> Decide on actionable items that the team agrees to implement
+                in the next sprint.</li>
         </ul>
-        <p>Click on a section to add a sticky note with your comments. You can drag and position the sticky notes anywhere within the section.</p>
+        <p>Click on a section to add a sticky note with your comments. You can drag and position the sticky notes
+            anywhere within the section.</p>
     </div>
     <!-- The retro-board div follows here -->
 
@@ -44,13 +48,12 @@
             <div class="sticky-notes-container"></div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
-    <script>
-        window.onload = function() {
-            enableDropZones();
-            // Other initialization code can go here
-        };
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        var boardId = "{{ board_id }}";
     </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 
 </html>
