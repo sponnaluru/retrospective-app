@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retrospective Board</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
     <div class="board-description">
         <h2>The 4-step Retrospective</h2>
         <p>This retrospective board is divided into four sections, each representing a different area of focus:</p>
         <ul>
-            <li><strong>Let's appreciate others:</strong> Acknowledge the hard work and achievements of your teammates.
-            </li>
+            <li><strong>Let's appreciate others:</strong> Acknowledge the hard work and achievements of your teammates.</li>
             <li><strong>What went well?:</strong> Discuss what worked well during the last sprint and why.</li>
-            <li><strong>What can we do better?:</strong> Identify any challenges faced and how they can be improved.
-            </li>
-            <li><strong>Actions for next sprint:</strong> Decide on actionable items that the team agrees to implement
-                in the next sprint.</li>
+            <li><strong>What can we do better?:</strong> Identify any challenges faced and how they can be improved.</li>
+            <li><strong>Actions for next sprint:</strong> Decide on actionable items that the team agrees to implement in the next sprint.</li>
         </ul>
-        <p>Click on a section to add a sticky note with your comments. You can drag and position the sticky notes
-            anywhere within the section.</p>
+        <p>Click on a section to add a sticky note with your comments. You can drag and position the sticky notes anywhere within the section.</p>
     </div>
-    <!-- The retro-board div follows here -->
 
+    <!-- The retro-board div follows here -->
     <div class="retro-board">
         <div class="retro-section" id="appreciate">
             <h2>Let's appreciate others</h2>
@@ -55,5 +49,4 @@
     </script>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
-
 </html>

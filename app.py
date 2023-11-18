@@ -9,14 +9,51 @@ app = Flask(__name__)
 app.secret_key = '1234567890abcdef1234567890abcdef'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
+
+class StickyNote(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(500))
+    board_id = db.Column(db.String(36))
+
+@socketio.on('add_sticky_note')
+def handle_add_sticky_note(data):
+    content = data['content']
+    board_id = data['board_id']
+    new_note = StickyNote(content=content, board_id=board_id)
+    db.session.add(new_note)
+    db.session.commit()
+    emit('sticky_note_added', {'id': new_note.id, 'content': content, 'board_id': board_id}, room=board_id)
+
+@socketio.on('update_sticky_note')
+def handle_update_sticky_note(data):
+    note_id = data['id']
+    content = data['content']
+    note = StickyNote.query.get(note_id)
+    if note:
+        note.content = content
+        db.session.commit()
+        emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
+
+@socketio.on('delete_sticky_note')
+def handle_delete_sticky_note(data):
+    note_id = data['id']
+    note = StickyNote.query.get(note_id)
+    if note:
+        db.session.delete(note)
+        db.session.commit()
+        emit('sticky_note_deleted', {'id': note_id}, room=note.board_id)
 
 @socketio.on('join_board')
 def on_join(data):
     room = data['board_id']
     join_room(room)
-    # emit('status', {'msg': f'Someone has joined the board {room}.'}, room=room)
+    notes = StickyNote.query.filter_by(board_id=room).all()
+    notes_data = [{'id': note.id, 'content': note.content} for note in notes]
+    emit('load_sticky_notes', notes_data, room=request.sid)
+
 
 @socketio.on('update_board')
 def on_update_board(data):
@@ -46,6 +83,4 @@ def board_defaukt():
     return render_template('board.html', retro_type=retro_type)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-migrate = Migrate(app, db)
+    socketio.run(app, debug=True)
