@@ -71,11 +71,11 @@ def create_board():
     team_size = request.form['teamSize']  # make sure these match your form input names
     session['retro_type'] = retro_type
     unique_id = str(uuid4())
-    return redirect(url_for('board', board_id=unique_id))
+    return redirect(url_for('board', board_id=unique_id, retro_type=retro_type))
 
-@app.route('/board/<board_id>')
-def board(board_id):
-    return render_template('board.html', board_id=board_id)
+@app.route('/board/<board_id>/<retro_type>')
+def board(board_id, retro_type):
+    return render_template(f'{retro_type}_board.html', board_id=board_id)
 
 @app.route('/board')
 def board_defaukt():

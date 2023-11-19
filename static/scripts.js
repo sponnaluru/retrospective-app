@@ -119,6 +119,29 @@ window.onload = function () {
     enableDropZones();
 };
 
+function addStickyNoteToArm(armId, noteContent) {
+    const arm = document.getElementById(armId);
+    const stickyNote = createStickyNoteElement(noteContent);
+    arm.appendChild(stickyNote);
+}
+
+function createStickyNoteElement(content) {
+    const note = document.createElement('div');
+    // Add classes, content, and event listeners to the note
+    return note;
+}
+
+// Add event listeners to each arm for the sticky note placement
+document.querySelectorAll('.starfish-arm').forEach(arm => {
+    arm.addEventListener('click', function(event) {
+        // Calculate the position for the sticky note based on the click
+        // and the arm's rotation
+        const noteContent = prompt('Enter your note:'); // Example interaction
+        addStickyNoteToArm(arm.id, noteContent);
+    });
+});
+
+
 // function addStickyNoteToSection(sectionId) {
 //     var section = document.getElementById(sectionId);
 //     var stickyNotesContainer = section.querySelector('.sticky-notes-container');

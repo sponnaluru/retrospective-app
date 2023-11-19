@@ -1,241 +1,264 @@
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #eaeaea;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eaeaea;
+}
 
-    .retro-board {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 20px;
-    }
+.retro-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
 
-    .retro-section {
-        flex: 0 0 48%;
-        margin: 1%;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
-        height: auto;
-        box-sizing: border-box;
-        position: relative;
-    }
+.retro-section {
+    flex: 0 0 48%;
+    margin: 1%;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    height: auto;
+    box-sizing: border-box;
+    position: relative;
+}
+/* Styles for the 4-step Retrospective */
+#appreciate {
+    background-color: #ffdef4; /* Light Pink */
+}
+#went-well {
+    background-color: #c6ffc6; /* Light Green */
+}
+#do-better {
+    background-color: #fce4e4; /* Light Red */
+}
+#next-actions {
+    background-color: #e0e0fd; /* Light Blue */
+}
+/* Styles for the Starfish Retrospective */
+#keep-doing {
+    background-color: #b8dcff; /* Powder Blue */
+}
+#do-less {
+    background-color: #ffd2e2; /* Melon */
+}
+#do-more {
+    background-color: #dafeff; /* Flamingo Pink */
+}
+#stop-doing {
+    background-color: #e5cff2; /* Lavender Gray */
+}
+#start-doing {
+    background-color: #ffdacd; /* Peach Puff */
+}
 
-    /* You can keep the rest of your CSS for colors and sticky notes container unchanged */
+/* Styles for the Plus Delta Retrospective */
+#plus {
+    background-color: #c4e3ff; /* Baby Blue */
+}
+#delta {
+    background-color: #d8ffca; /* Bone */
+}
 
-    #appreciate {
-        background-color: #f8d5ec;
-    }
+/* Styles for the Start, Stop, Continue Retrospective */
+#start {
+    background-color: #cdffba; /* Baby Blue Eyes */
+}
+#stop {
+    background-color: rgb(251, 178, 178); /* Peach */
+}
+#continue {
+    background-color: #fdffb6; /* Lemon Merengue */
+}
 
-    #went-well {
-        background-color: #d9ffd9;
-    }
+/* Styles for the Sailboat Retrospective */
+#wind {
+    background-color: #dbcaff; /* Sky Blue */
+}
+#rocks {
+    background-color: #e7f4be; /* Pastel Red */
+}
+#anchor {
+    background-color: #f9dede; /* Pale Spring Bud */
+}
 
-    #do-better {
-        background-color: #fce4e4;
-    }
+#island {
+    background-color: #f9ffd1; /* Pale Spring Bud */
+}
 
-    #next-actions {
-        background-color: #e5e5fe;
-    }
+/* Your existing styles for .sticky-note, .add-note, etc., will continue here */
 
-    .sticky-notes-container {
-        display: flex;
-        /* Aligns sticky notes in a row */
-        flex-wrap: wrap;
-        /* Allows sticky notes to wrap to the next line if space runs out */
-        gap: 10px;
-        /* Adds space between sticky notes */
-        align-items: flex-start;
-        /* Aligns sticky notes at the top of the container */
-        min-height: 250px;
-        /* Ensures the container has a minimum height */
-        color: rgba(0, 0, 0, 0.5);
-    }
+.sticky-notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-start;
+    min-height: 250px;
+    color: rgba(0, 0, 0, 0.5);
+}
 
-
-    .sticky-note {
-        background: #fdfd86;
-        /* Change as needed */
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 5px;
-        cursor: text;
-        min-width: 150px;
-        /* Minimum width */
-        min-height: 10px;
-        /* Minimum height */
-        padding: 10px;
-        /* Padding inside */
-        overflow: auto;
-    }
-
-
-    .sticky-note.empty::before {
-        content: attr(data-placeholder);
-        /* Use a data attribute for the placeholder text */
-        color: rgba(0, 0, 0, 0.5);
-        /* Semi-transparent text color */
-        cursor: text;
-    }
-
-    .sticky-note:active,
-    .sticky-note:focus {
-        opacity: 0.5;
-        color: rgba(0, 0, 0, 1);
-        /* Solid text color when the element is focused */
-    }
+/* .sticky-note {
+    background: #fdfd86;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: text;
+    min-width: 150px;
+    min-height: 10px;
+    padding: 10px;
+    overflow: auto;
+} */
+.sticky-note {
+    background-color: #fff9c4; /* Light yellow */
+    border: 1px solid #ffd600; /* Yellow border */
+    padding: 10px;
+    margin: 10px;
+    min-height: 50px;
+    width: 200px;
+    resize: both;
+    overflow: auto;
+}
 
 
-    .sticky-notes-container.over {
-        border: 2px dashed #aaa; /* Example style for highlighting */
-    }
+.sticky-note.empty::before {
+    content: attr(data-placeholder);
+    color: rgba(0, 0, 0, 0.5);
+    cursor: text;
+}
 
-    h1 {
-        text-align: center;
-        color: #333;
-        padding: 20px 0;
-    }
+.sticky-note:active,
+.sticky-note:focus {
+    opacity: 0.5;
+    color: rgba(0, 0, 0, 1);
+}
 
-    h2 {
-        text-align: center;
-        margin-top: 0;
-    }
+.sticky-notes-container.over {
+    border: 2px dashed #aaa;
+}
 
-    .board-description {
-        margin: 20px;
-        padding: 15px;
-        background-color: #f7f7f7;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
-    }
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 20px 0;
+}
 
-    .board-description h2 {
-        text-align: center;
-        color: #333;
-    }
+h2 {
+    text-align: center;
+    margin-top: 0;
+}
 
-    .board-description p,
-    .board-description ul {
-        color: #666;
-        line-height: 1.6;
-    }
+.board-description {
+    margin: 20px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
 
-    .board-description ul {
-        list-style-type: none;
-        /* Removes the default bullet points */
-        padding: 0;
-    }
+.board-description h2 {
+    text-align: center;
+    color: #333;
+}
 
-    .board-description li::before {
-        content: '•';
-        color: #007bff;
-        position: relative;
-    }
+.board-description p,
+.board-description ul {
+    color: #666;
+    line-height: 1.6;
+}
 
-    .add-note {
-        position: absolute;
-        /* Position it relative to its parent */
-        top: 10px;
-        /* Adjust as needed */
-        right: 10px;
-        /* Adjust as needed */
-        background-color: #007bff;
-        /* Button color */
-        color: white;
-        /* Symbol color */
-        width: 25px;
-        /* Symbol size */
-        height: 25px;
-        /* Symbol size */
-        border-radius: 50%;
-        /* Make it round */
-        text-align: center;
-        /* Center the '+' symbol */
-        line-height: 25px;
-        /* Center the '+' symbol vertically */
-        cursor: pointer;
-        /* Change cursor to pointer to indicate it's clickable */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        /* Optional: add some shadow for depth */
-        font-size: 20px;
-        /* Adjust the size of '+' symbol */
-        font-weight: bold;
-        /* Make the '+' symbol thicker */
-    }
-    
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    select,
-    input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        font-size: 16px;
-    }
-    
-    button {
-        background-color: #5cb85c;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 18px;
-        width: 100%;
-    }
-    
-    button:hover {
-        background-color: #4cae4c;
-    }
+.board-description ul {
+    list-style-type: none;
+    padding: 0;
+}
 
-    .index-body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }    
+.board-description li::before {
+    content: '•';
+    color: #007bff;
+    position: relative;
+}
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 20px;
-    }
-    
-    .form-group label {
-        margin-bottom: 5px;
-    }
-    
-    .form-group select,
-    .form-group input[type="number"] {
-        width: 100%; /* Ensures both input and select have the same width */
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        box-sizing: border-box; /* Includes padding and border in the element's total width and height */
-    }
-    
-    /* Style for the container to ensure it's centered */
-    .container {
-        width: 100%;
-        max-width: 360px; /* or any other width you prefer */
-        margin: auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+.add-note {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.index-body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+   
+}
+
+/* Unique backgrounds for each board type */
+#board-4step {
+    background-image: url('path-to-4step-background.jpg');
+}
+
+#board-starfish {
+    background-image: url('path-to-starfish-background.jpg');
+}
+
+#board-sailboat {
+    background-image: url('path-to-sailboat-background.jpg');
+}
+
+#board-plusDelta {
+    background-image: url('path-to-plusDelta-background.jpg');
+}
+
+#board-startStopContinue {
+    background-image: url('path-to-startStopContinue-background.jpg');
+}

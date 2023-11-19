@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starfish Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="board-description">
+        <h2>Starfish Retrospective</h2>
+        <p>This retrospective board is structured into five sections, each symbolizing a distinct strategy for team reflection:</p>
+        <ul>
+            <li><strong>Start:</strong> Pinpoint new practices or approaches the team should adopt.</li>
+            <li><strong>Stop:</strong> Identify behaviors or processes that are hindering progress and should be ceased.</li>
+            <li><strong>Continue:</strong> Acknowledge the current actions that are yielding positive results and should be carried on.</li>
+            <li><strong>Do More:</strong> Determine what practices are working and should be intensified.</li>
+            <li><strong>Do Less:</strong> Recognize what is being overdone and should be reduced.</li>
+        </ul>
+        <p>Engage with each section by adding a sticky note to share your thoughts. Move and place the sticky notes freely to emphasize your points.</p>
+    </div>
+    
+    <div class="retro-board" id="board-4step">
+        <div class="retro-section" id="start">
+            <h2>Start</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('start')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="stop">
+            <h2>Stop</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('stop')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="keep-doing">
+            <h2>Keep Doing</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('keep-doing')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="do-more">
+            <h2>Do More</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('do-more')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="do-less">
+            <h2>Do Less</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('do-less')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        var boardId = "{{ board_id }}";
+    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
