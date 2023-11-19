@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Stop Continue Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="board-description">
+        <h2>Start Stop Continue Retrospective</h2>
+        <p>This retrospective board enables a straightforward review of team practices with three clear prompts:</p>
+        <ul>
+            <li><strong>Start:</strong> Enumerate the activities or strategies the team should begin employing.</li>
+            <li><strong>Stop:</strong> Call out any counterproductive or unnecessary practices that need to be halted.</li>
+            <li><strong>Continue:</strong> Reaffirm the valuable actions that contribute positively to the team's work and should persist.</li>
+        </ul>
+        <p>Interact with each section using sticky notes to voice your suggestions, arranging them to signal their importance or sequence.</p>
+    </div>    
+
+    <div class="retro-board" id="board-startStopContinue">
+        <div class="retro-section" id="start">
+            <h2>Start</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('start')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="stop">
+            <h2>Stop</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('stop')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="continue">
+            <h2>Continue</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('continue')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        var boardId = "{{ board_id }}";
+    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

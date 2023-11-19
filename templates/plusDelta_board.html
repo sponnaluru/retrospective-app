@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plus Delta Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="board-description">
+        <h2>Plus Delta Retrospective</h2>
+        <p>The Plus Delta Retrospective board is focused on continuous improvement, broken down into two main categories:</p>
+        <ul>
+            <li><strong>Plus (What worked well):</strong> Discuss the successful strategies and why they should be maintained.</li>
+            <li><strong>Delta (Opportunities for improvement):</strong> Identify what could be changed or improved for better outcomes in future sprints.</li>
+        </ul>
+        <p>Use sticky notes to contribute your insights and rearrange them as needed to prioritize the team's reflections.</p>
+    </div>    
+
+    <div class="retro-board" id="board-plusDelta">
+        <div class="retro-section" id="plus">
+            <h2>Plus</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('plus')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="delta">
+            <h2>Delta</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('delta')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        var boardId = "{{ board_id }}";
+    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

@@ -17,25 +17,37 @@ class StickyNote(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(500))
     board_id = db.Column(db.String(36))
+    section_id = db.Column(db.String(100))  # New column for section ID
 
 @socketio.on('add_sticky_note')
 def handle_add_sticky_note(data):
     content = data['content']
     board_id = data['board_id']
-    new_note = StickyNote(content=content, board_id=board_id)
+    section_id = data.get('section_id', 'default_section')  # Get section ID from the data, or use a default
+
+    new_note = StickyNote(content=content, board_id=board_id, section_id=data['section_id'])
     db.session.add(new_note)
     db.session.commit()
-    emit('sticky_note_added', {'id': new_note.id, 'content': content, 'board_id': board_id}, room=board_id)
+
+    emit('sticky_note_added', {
+        'id': new_note.id, 
+        'content': content, 
+        'board_id': board_id, 
+        'section_id': section_id
+    }, room=board_id)
+
 
 @socketio.on('update_sticky_note')
 def handle_update_sticky_note(data):
     note_id = data['id']
     content = data['content']
+    board_id = data['board_id']
     note = StickyNote.query.get(note_id)
     if note:
         note.content = content
         db.session.commit()
-        emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
+        emit('sticky_note_updated', data, room=board_id, include_self=False)
+        #emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
 
 @socketio.on('delete_sticky_note')
 def handle_delete_sticky_note(data):
@@ -51,7 +63,7 @@ def on_join(data):
     room = data['board_id']
     join_room(room)
     notes = StickyNote.query.filter_by(board_id=room).all()
-    notes_data = [{'id': note.id, 'content': note.content} for note in notes]
+    notes_data = [{'id': note.id, 'content': note.content, 'section_id': note.section_id} for note in notes]
     emit('load_sticky_notes', notes_data, room=request.sid)
 
 
@@ -71,11 +83,11 @@ def create_board():
     team_size = request.form['teamSize']  # make sure these match your form input names
     session['retro_type'] = retro_type
     unique_id = str(uuid4())
-    return redirect(url_for('board', board_id=unique_id))
+    return redirect(url_for('board', board_id=unique_id, retro_type=retro_type))
 
-@app.route('/board/<board_id>')
-def board(board_id):
-    return render_template('board.html', board_id=board_id)
+@app.route('/board/<board_id>/<retro_type>')
+def board(board_id, retro_type):
+    return render_template(f'{retro_type}_board.html', board_id=board_id)
 
 @app.route('/board')
 def board_defaukt():

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sailboat Board</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="board-description">
+        <h2>Sailboat Retrospective</h2>
+        <p>The Sailboat Retrospective board is visually themed to resemble a journey at sea, segmented into different concepts:</p>
+        <ul>
+            <li><strong>Wind:</strong> Consider what is propelling the team forward.</li>
+            <li><strong>Anchors:</strong> Reflect on what is holding the team back.</li>
+            <li><strong>Rocks:</strong> Anticipate potential risks on the horizon.</li>
+            <li><strong>Island:</strong> Define the ultimate goals and objectives towards which the team is sailing.</li>
+        </ul>
+        <p>Add your observations as sticky notes within each category. Position them to illustrate their impact on the team's voyage.</p>
+    </div>    
+
+    <div class="retro-board" id="board-sailboat">
+        <div class="retro-section" id="wind">
+            <h2>Wind (Helping Us Move Forward)</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('wind')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="anchor">
+            <h2>Anchor (Holding Us Back)</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('anchor')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="rocks">
+            <h2>Rocks (Risks and Challenges)</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('rocks')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+        <div class="retro-section" id="island">
+            <h2>Island (Goals and Destinations)</h2>
+            <div class="add-note" onclick="addStickyNoteToSection('island')">+</div>
+            <div class="sticky-notes-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+        var boardId = "{{ board_id }}";
+    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
