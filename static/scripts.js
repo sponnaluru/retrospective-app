@@ -6,12 +6,13 @@ function addStickyNoteToSection(sectionId) {
     socket.emit('add_sticky_note', {
         id: noteId, 
         content: noteContent, 
-        board_id: boardId
+        board_id: boardId,
+        section_id: sectionId
     });
 
 }
 
-function createStickyNote(id, content) {
+function createStickyNote(id, content, sectionId) {
     var stickyNote = document.createElement('div');
     stickyNote.classList.add('sticky-note');
     stickyNote.contentEditable = true;
@@ -56,7 +57,12 @@ function createStickyNote(id, content) {
     });
 
     stickyNote.addEventListener('input', function(event) {
-        socket.emit('update_sticky_note', { id: stickyNote.id, content: stickyNote.innerHTML, board_id: boardId });
+        socket.emit('update_sticky_note', { 
+            id: stickyNote.id, 
+            content: stickyNote.innerHTML, 
+            board_id: boardId, 
+            section_id: sectionId 
+        });
     });
 
     return stickyNote;
@@ -97,14 +103,20 @@ socket.on('connect', function () {
 
 socket.on('load_sticky_notes', function(notes) {
     notes.forEach(function(note) {
-        addStickyNoteToBoard(note.id, note.content);
+        addStickyNoteToBoard(note.id, note.content, note.section_id);
     });
 });
 
+
 socket.on('sticky_note_added', function(note) {
+    if (!document.getElementById(note.section_id)) {
+        console.error('Invalid section ID:', note.section_id);
+        return; // Exit if the section ID is invalid
+    }
+
     var existingNote = document.getElementById(note.id);
     if (!existingNote) {
-        addStickyNoteToBoard(note.id, note.content);
+        addStickyNoteToBoard(note.id, note.content, note.section_id);
     }
 });
 
@@ -116,10 +128,14 @@ socket.on('sticky_note_updated', function(note) {
     }
 });
 
-function addStickyNoteToBoard(id, content) {
-    var section = document.getElementById('appreciate'); // Replace with your default section ID
+function addStickyNoteToBoard(id, content, sectionId) {
+    var section = document.getElementById(sectionId);
+    if (!section) {
+        console.error('Section not found:', sectionId);
+        return; // Exit if the section is not found
+    }
     var stickyNotesContainer = section.querySelector('.sticky-notes-container');
-    var stickyNote = createStickyNote(id, content);
+    var stickyNote = createStickyNote(id, content, sectionId);
     stickyNotesContainer.appendChild(stickyNote);
 }
 

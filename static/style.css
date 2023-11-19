@@ -68,7 +68,7 @@ body {
     background-color: rgb(251, 178, 178); /* Peach */
 }
 #continue {
-    background-color: #fdffb6; /* Lemon Merengue */
+    background-color: #e7fff3; /* Lemon Merengue */
 }
 
 /* Styles for the Sailboat Retrospective */
@@ -76,14 +76,14 @@ body {
     background-color: #dbcaff; /* Sky Blue */
 }
 #rocks {
-    background-color: #e7f4be; /* Pastel Red */
+    background-color: #cfffd9; /* Pastel Red */
 }
 #anchor {
     background-color: #f9dede; /* Pale Spring Bud */
 }
 
 #island {
-    background-color: #f9ffd1; /* Pale Spring Bud */
+    background-color: #c6f3fe; /* Pale Spring Bud */
 }
 
 .sticky-notes-container {
