@@ -86,29 +86,17 @@ body {
     background-color: #f9ffd1; /* Pale Spring Bud */
 }
 
-/* Your existing styles for .sticky-note, .add-note, etc., will continue here */
-
 .sticky-notes-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     align-items: flex-start;
     min-height: 250px;
-    color: rgba(0, 0, 0, 0.5);
+    /* Add the following to ensure left-to-right alignment */
+    flex-direction: row;
+    justify-content: flex-start; 
 }
 
-/* .sticky-note {
-    background: #fdfd86;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    cursor: text;
-    min-width: 150px;
-    min-height: 10px;
-    padding: 10px;
-    overflow: auto;
-} */
 .sticky-note {
     background-color: #fff9c4; /* Light yellow */
     border: 1px solid #ffd600; /* Yellow border */

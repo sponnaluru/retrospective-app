@@ -31,11 +31,13 @@ def handle_add_sticky_note(data):
 def handle_update_sticky_note(data):
     note_id = data['id']
     content = data['content']
+    board_id = data['board_id']
     note = StickyNote.query.get(note_id)
     if note:
         note.content = content
         db.session.commit()
-        emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
+        emit('sticky_note_updated', data, room=board_id, include_self=False)
+        #emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
 
 @socketio.on('delete_sticky_note')
 def handle_delete_sticky_note(data):
