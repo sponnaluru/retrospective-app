@@ -80,7 +80,7 @@ def home():
 def create_board():
 # Example of retrieving form data
     retro_type = request.form['retroType']
-    team_size = request.form['teamSize']  # make sure these match your form input names
+    # team_size = request.form['teamSize']  # make sure these match your form input names
     session['retro_type'] = retro_type
     unique_id = str(uuid4())
     return redirect(url_for('board', board_id=unique_id, retro_type=retro_type))

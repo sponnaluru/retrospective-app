@@ -5,10 +5,22 @@ body {
     background-color: #eaeaea;
 }
 
-  h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  }
-  
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* This centers the content vertically */
+    align-items: center;
+    /* This centers the content horizontally */
+    height: 50vh;
+    /* This ensures the container takes up the full viewport height */
+}
 
 .retro-board {
     display: flex;
@@ -27,68 +39,100 @@ body {
     box-sizing: border-box;
     position: relative;
 }
+
 /* Styles for the 4-step Retrospective */
 #appreciate {
-    background-color: #ffdef4; /* Light Pink */
+    background-color: #ffdef4;
+    /* Light Pink */
 }
+
 #went-well {
-    background-color: #c6ffc6; /* Light Green */
+    background-color: #c6ffc6;
+    /* Light Green */
 }
+
 #do-better {
-    background-color: #fce4e4; /* Light Red */
+    background-color: #fce4e4;
+    /* Light Red */
 }
+
 #next-actions {
-    background-color: #e0e0fd; /* Light Blue */
+    background-color: #e0e0fd;
+    /* Light Blue */
 }
+
 /* Styles for the Starfish Retrospective */
 #keep-doing {
-    background-color: #b8dcff; /* Powder Blue */
+    background-color: #b8dcff;
+    /* Powder Blue */
 }
+
 #do-less {
-    background-color: #ffd2e2; /* Melon */
+    background-color: #ffd2e2;
+    /* Melon */
 }
+
 #do-more {
-    background-color: #dafeff; /* Flamingo Pink */
+    background-color: #dafeff;
+    /* Flamingo Pink */
 }
+
 #stop-doing {
-    background-color: #e5cff2; /* Lavender Gray */
+    background-color: #e5cff2;
+    /* Lavender Gray */
 }
+
 #start-doing {
-    background-color: #ffdacd; /* Peach Puff */
+    background-color: #ffdacd;
+    /* Peach Puff */
 }
 
 /* Styles for the Plus Delta Retrospective */
 #plus {
-    background-color: #c4e3ff; /* Baby Blue */
+    background-color: #c4e3ff;
+    /* Baby Blue */
 }
+
 #delta {
-    background-color: #d8ffca; /* Bone */
+    background-color: #d8ffca;
+    /* Bone */
 }
 
 /* Styles for the Start, Stop, Continue Retrospective */
 #start {
-    background-color: #cdffba; /* Baby Blue Eyes */
+    background-color: #cdffba;
+    /* Baby Blue Eyes */
 }
+
 #stop {
-    background-color: rgb(251, 178, 178); /* Peach */
+    background-color: rgb(251, 178, 178);
+    /* Peach */
 }
+
 #continue {
-    background-color: #e7fff3; /* Lemon Merengue */
+    background-color: #e7fff3;
+    /* Lemon Merengue */
 }
 
 /* Styles for the Sailboat Retrospective */
 #wind {
-    background-color: #dbcaff; /* Sky Blue */
+    background-color: #dbcaff;
+    /* Sky Blue */
 }
+
 #rocks {
-    background-color: #cfffd9; /* Pastel Red */
+    background-color: #cfffd9;
+    /* Pastel Red */
 }
+
 #anchor {
-    background-color: #f9dede; /* Pale Spring Bud */
+    background-color: #f9dede;
+    /* Pale Spring Bud */
 }
 
 #island {
-    background-color: #c6f3fe; /* Pale Spring Bud */
+    background-color: #c6f3fe;
+    /* Pale Spring Bud */
 }
 
 .sticky-notes-container {
@@ -99,12 +143,14 @@ body {
     min-height: 250px;
     /* Add the following to ensure left-to-right alignment */
     flex-direction: row;
-    justify-content: flex-start; 
+    justify-content: flex-start;
 }
 
 .sticky-note {
-    background-color: #fff9c4; /* Light yellow */
-    border: 1px solid #ffd600; /* Yellow border */
+    background-color: #fff9c4;
+    /* Light yellow */
+    border: 1px solid #ffd600;
+    /* Yellow border */
     padding: 10px;
     margin: 10px;
     min-height: 50px;
@@ -232,7 +278,7 @@ button:hover {
 .form-group {
     display: flex;
     flex-direction: column;
-   
+
 }
 
 /* Unique backgrounds for each board type */
