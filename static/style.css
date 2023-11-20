@@ -281,6 +281,23 @@ button:hover {
 
 }
 
+.delete-note-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+
 /* Unique backgrounds for each board type */
 #board-4step {
     background-image: url('path-to-4step-background.jpg');

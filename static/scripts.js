@@ -18,6 +18,18 @@ function createStickyNote(id, content, sectionId) {
     stickyNote.contentEditable = true;
     stickyNote.setAttribute('draggable', true);
     stickyNote.id = id;
+    stickyNote.setAttribute('data-section-id', sectionId);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'X';
+    deleteButton.className = 'delete-button';
+    deleteButton.onclick = function() {
+        if (confirm('Are you sure you want to delete this note?')) {
+            socket.emit('delete_sticky_note', { id: id, board_id: boardId });
+        }
+    };
+
+    stickyNote.appendChild(deleteButton);
 
     stickyNote.addEventListener('dragstart', function (event) {
         event.dataTransfer.setData('text/plain', stickyNote.id);
@@ -91,6 +103,9 @@ function enableDropZones() {
             var id = event.dataTransfer.getData('text/plain');
             var draggableElement = document.getElementById(id);
             dropZone.appendChild(draggableElement);
+
+            const newSectionId = dropZone.parentElement.id;
+            socket.emit('move_sticky_note', { id: draggableElement.id, section_id: newSectionId, board_id: boardId });
         });
     });
 }
@@ -138,6 +153,28 @@ function addStickyNoteToBoard(id, content, sectionId) {
     var stickyNote = createStickyNote(id, content, sectionId);
     stickyNotesContainer.appendChild(stickyNote);
 }
+
+function deleteStickyNote(noteId) {
+    socket.emit('delete_sticky_note', { id: noteId, board_id: boardId });
+}
+
+socket.on('sticky_note_deleted', function(data) {
+    const note = document.getElementById(data.id);
+    if (note) {
+        note.remove();
+    }
+});
+
+socket.on('sticky_note_section_updated', function(data) {
+       const stickyNote = document.getElementById(data.id);
+       const newContainer = document.getElementById(data.section_id).querySelector('.sticky-notes-container');
+   
+       // Move the sticky note to the new container
+       if (stickyNote && newContainer) {
+           newContainer.appendChild(stickyNote);
+       }
+});
+
 
 window.onload = function () {
     enableDropZones();
