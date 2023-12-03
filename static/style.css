@@ -188,6 +188,8 @@ h2 {
 }
 
 .board-description {
+    position: relative; /* Add this to make it a reference for absolute positioning */
+    padding-top: 50px; /* Add space for the button */
     margin: 20px;
     padding: 15px;
     background-color: #f7f7f7;
@@ -317,4 +319,39 @@ button:hover {
 
 #board-startStopContinue {
     background-image: url('path-to-startStopContinue-background.jpg');
+}
+
+.home-button-container {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    margin: 10px;
+    z-index: 20;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50; /* or any color you prefer */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* or the size you prefer */
+}
+
+button:hover {
+    background-color: #45a049; /* a slightly darker shade for hover effect */
+}
+
+.home-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.home-button img {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
