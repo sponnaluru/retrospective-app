@@ -18,27 +18,46 @@ function createStickyNote(id, content, sectionId) {
     stickyNote.contentEditable = true;
     stickyNote.setAttribute('draggable', true);
     stickyNote.id = id;
+    stickyNote.setAttribute('data-section-id', sectionId);
 
-    stickyNote.addEventListener('dragstart', function (event) {
+    // Create delete button
+    var deleteBtn = document.createElement('span');
+    deleteBtn.innerHTML = '&times;'; 
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.onclick = function() {
+        if (confirm('Are you sure you want to delete this note?')) {
+            socket.emit('delete_sticky_note', { id: id, board_id: boardId });
+        }
+    };
+    stickyNote.appendChild(deleteBtn);
+
+    // Create a container for the content and add it to the sticky note
+    var contentContainer = document.createElement('div');
+    contentContainer.innerHTML = content;
+    stickyNote.appendChild(contentContainer);
+
+    // Drag start event listener
+    stickyNote.addEventListener('dragstart', function(event) {
         event.dataTransfer.setData('text/plain', stickyNote.id);
     });
 
-    stickyNote.innerHTML = content;
-
-    stickyNote.addEventListener('focus', function (event) {
-        if (stickyNote.innerHTML.trim() === 'Add your comments') {
-            stickyNote.innerHTML = '<div>•&nbsp;</div>';
-            setCaretToEnd(stickyNote);
+    // Focus event listener
+    stickyNote.addEventListener('focus', function(event) {
+        if (contentContainer.innerHTML.trim() === 'Add your comments') {
+            contentContainer.innerHTML = '<div>•&nbsp;</div>';
+            setCaretToEnd(contentContainer);
         }
     });
 
-    stickyNote.addEventListener('blur', function (event) {
-        if (!stickyNote.textContent.trim()) {
-            stickyNote.innerHTML = 'Add your comments';
+    // Blur event listener
+    stickyNote.addEventListener('blur', function(event) {
+        if (!contentContainer.textContent.trim()) {
+            contentContainer.innerHTML = 'Add your comments';
         }
     });
 
-    stickyNote.addEventListener('keydown', function (event) {
+    // Keydown event listener
+    stickyNote.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault();
             var selection = window.getSelection();
@@ -56,10 +75,11 @@ function createStickyNote(id, content, sectionId) {
         }
     });
 
+    // Input event listener
     stickyNote.addEventListener('input', function(event) {
         socket.emit('update_sticky_note', { 
             id: stickyNote.id, 
-            content: stickyNote.innerHTML, 
+            content: contentContainer.innerHTML, 
             board_id: boardId, 
             section_id: sectionId 
         });
@@ -91,9 +111,32 @@ function enableDropZones() {
             var id = event.dataTransfer.getData('text/plain');
             var draggableElement = document.getElementById(id);
             dropZone.appendChild(draggableElement);
+
+            const newSectionId = dropZone.parentElement.id;
+            socket.emit('move_sticky_note', { id: draggableElement.id, section_id: newSectionId, board_id: boardId });
         });
     });
 }
+
+function exportToPDF() {
+    var element = document.querySelector('.retro-board');
+    var header = document.getElementById('pdf-header');
+    var urlSpan = document.getElementById('page-url');
+    urlSpan.textContent = window.location.href; // Set the current URL
+    header.style.display = 'block'; // Make the header visible for the PDF
+  
+    var opt = {
+      margin: 1,
+      filename: 'retrospective.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, logging: true, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+  
+    html2pdf().from(element).set(opt).save().then(function() {
+      header.style.display = 'none'; // Hide the header again after exporting
+    });
+  }
 
 var socket = io.connect(window.location.origin);
 
@@ -139,6 +182,41 @@ function addStickyNoteToBoard(id, content, sectionId) {
     stickyNotesContainer.appendChild(stickyNote);
 }
 
+function deleteStickyNote(noteId) {
+    socket.emit('delete_sticky_note', { id: noteId, board_id: boardId });
+}
+
+function setupDeleteButtonListeners() {
+    var deleteButtons = document.querySelectorAll('.delete-note');
+    deleteButtons.forEach(function(button) {
+        button.onclick = function() {
+            var noteId = button.getAttribute('data-note-id');
+            if (confirm('Are you sure you want to delete this note?')) {
+                socket.emit('delete_sticky_note', { id: noteId, board_id: boardId });
+            }
+        };
+    });
+}
+
+socket.on('sticky_note_deleted', function(data) {
+    const noteToDelete = document.getElementById(data.id);
+    if (noteToDelete) {
+        noteToDelete.remove();
+    }
+});
+
+socket.on('sticky_note_section_updated', function(data) {
+       const stickyNote = document.getElementById(data.id);
+       const newContainer = document.getElementById(data.section_id).querySelector('.sticky-notes-container');
+   
+       // Move the sticky note to the new container
+       if (stickyNote && newContainer) {
+           newContainer.appendChild(stickyNote);
+       }
+});
+
+
 window.onload = function () {
     enableDropZones();
+    setupDeleteButtonListeners();
 };

@@ -49,15 +49,16 @@ def handle_update_sticky_note(data):
         emit('sticky_note_updated', data, room=board_id, include_self=False)
         #emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
 
-@socketio.on('delete_sticky_note')
-def handle_delete_sticky_note(data):
+@socketio.on('move_sticky_note')
+def handle_move_sticky_note(data):
     note_id = data['id']
+    new_section = data['section_id']
     note = StickyNote.query.get(note_id)
     if note:
-        db.session.delete(note)
+        note.section_id = new_section
         db.session.commit()
-        emit('sticky_note_deleted', {'id': note_id}, room=note.board_id)
-
+        emit('sticky_note_section_updated', {'id': note_id, 'section_id': new_section}, room=note.board_id, include_self=False)
+    
 @socketio.on('join_board')
 def on_join(data):
     room = data['board_id']
@@ -71,6 +72,16 @@ def on_join(data):
 def on_update_board(data):
     room = data['board_id']
     emit('board_updated', data, room=room, include_self=False)
+
+@socketio.on('delete_sticky_note')
+def handle_delete_sticky_note(data):
+    note_id = data['id']
+    board_id = data['board_id']
+    note = StickyNote.query.get(note_id)
+    if note:
+        db.session.delete(note)
+        db.session.commit()
+        emit('sticky_note_deleted', {'id': note_id}, room=board_id)
 
 @app.route('/')
 def home():

@@ -157,6 +157,7 @@ h3 {
     width: 200px;
     resize: both;
     overflow: auto;
+    position: relative;
 }
 
 
@@ -178,8 +179,7 @@ h3 {
 
 h1 {
     text-align: center;
-    color: #333;
-    padding: 20px 0;
+    color: #333333;
 }
 
 h2 {
@@ -188,6 +188,8 @@ h2 {
 }
 
 .board-description {
+    position: relative; /* Add this to make it a reference for absolute positioning */
+    padding-top: 50px; /* Add space for the button */
     margin: 20px;
     padding: 15px;
     background-color: #f7f7f7;
@@ -281,23 +283,106 @@ button:hover {
 
 }
 
-/* Unique backgrounds for each board type */
-#board-4step {
-    background-image: url('path-to-4step-background.jpg');
+.delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px; /* Adjust padding as necessary */
+    background-color: transparent; /* Clear any background */
+    color: #000; /* Change as needed */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px; /* Adjust font-size as necessary */
+    user-select: none; /* Prevent text selection */
+    border: none; /* Remove border if any */
+    display: inline-block; /* Aligns better with the text */
+    text-decoration: none; /* Removes underline if it's an anchor tag */
+    z-index: 10; /* Ensure the X is above other elements */
 }
 
-#board-starfish {
-    background-image: url('path-to-starfish-background.jpg');
+.delete-btn:hover {
+    color: red; /* Change as needed */
+    background-color: transparent; /* Ensures no background color on hover */
+    text-decoration: none; /* Ensure no underline on hover */
 }
 
-#board-sailboat {
-    background-image: url('path-to-sailboat-background.jpg');
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50; /* or any color you prefer */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* or the size you prefer */
 }
 
-#board-plusDelta {
-    background-image: url('path-to-plusDelta-background.jpg');
+button:hover {
+    background-color: #45a049; /* a slightly darker shade for hover effect */
 }
 
-#board-startStopContinue {
-    background-image: url('path-to-startStopContinue-background.jpg');
+.home-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
 }
+
+.home-button img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.icon-button {
+    padding: 5px 10px;
+    background-color: #4CAF50; /* or any color you prefer */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* or the size you prefer */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the space between icon and text */
+}
+
+.button-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+}
+
+/* Ensure the home-button-container doesn't overlap with the export button */
+.home-button-container {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Adjust as needed to not overlap with export button */
+    z-index: 20;
+}
+
+/* Additional styles to position the export button */
+.export-button-container {
+    position: absolute;
+    top: 10px;
+    right: 50px; /* Adjust as needed */
+    z-index: 20;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: space-between; /* This will place the children at the left and right ends */
+    align-items: center; /* This will center them vertically */
+    padding: 0 20px; /* Adjust the padding as needed */
+    margin-top: 20px; /* Gives some space at the top */
+}
+
+.pdf-heading {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #page-url {
+    font-size: 12px;
+  }
+  
