@@ -179,8 +179,7 @@ h3 {
 
 h1 {
     text-align: center;
-    color: #333;
-    padding: 20px 0;
+    color: #333333;
 }
 
 h2 {
@@ -329,14 +328,6 @@ button:hover {
     background-image: url('path-to-startStopContinue-background.jpg');
 }
 
-.home-button-container {
-    position: absolute;
-    top: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
-    margin: 10px;
-    z-index: 20;
-}
-
 button {
     padding: 5px 10px;
     background-color: #4CAF50; /* or any color you prefer */
@@ -363,3 +354,53 @@ button:hover {
     height: 24px;
     display: block;
 }
+
+.icon-button {
+    padding: 5px 10px;
+    background-color: #4CAF50; /* or any color you prefer */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* or the size you prefer */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the space between icon and text */
+}
+
+.button-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+}
+
+/* Ensure the home-button-container doesn't overlap with the export button */
+.home-button-container {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Adjust as needed to not overlap with export button */
+    z-index: 20;
+}
+
+/* Additional styles to position the export button */
+.export-button-container {
+    position: absolute;
+    top: 10px;
+    right: 50px; /* Adjust as needed */
+    z-index: 20;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: space-between; /* This will place the children at the left and right ends */
+    align-items: center; /* This will center them vertically */
+    padding: 0 20px; /* Adjust the padding as needed */
+    margin-top: 20px; /* Gives some space at the top */
+}
+
+.pdf-heading {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  

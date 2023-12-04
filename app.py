@@ -49,15 +49,6 @@ def handle_update_sticky_note(data):
         emit('sticky_note_updated', data, room=board_id, include_self=False)
         #emit('sticky_note_updated', {'id': note_id, 'content': content}, room=note.board_id)
 
-# @socketio.on('delete_sticky_note')
-# def handle_delete_sticky_note(data):
-#     note_id = data['id']
-#     note = StickyNote.query.get(note_id)
-#     if note:
-#         db.session.delete(note)
-#         db.session.commit()
-#         emit('sticky_note_deleted', {'id': note_id}, room=note.board_id)    
-
 @socketio.on('move_sticky_note')
 def handle_move_sticky_note(data):
     note_id = data['id']

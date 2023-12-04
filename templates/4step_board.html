@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="board-description">
-        <div class="home-button-container">
-            <button onclick="location.href='/'">Home</button>
-        </div>
+    <div class="icon-container">
+        <a href="/" class="icon-link">
+            <img src="{{ url_for('static', filename='images/home.PNG') }}" alt="Home" class="button-icon">
+        </a>
+        <h2>Sprint Retrospective Board</h2>
+        <a href="javascript:void(0);" onclick="exportToPDF()" class="icon-link">
+            <img src="{{ url_for('static', filename='images/pdf.PNG') }}" alt="Export to PDF" class="button-icon">
+        </a>
+    </div>
+    <div class="board-description">  
         <h2>The 4-step Retrospective</h2>
         <p>This retrospective board is divided into four sections, each representing a different area of focus:</p>
         <ul>
@@ -24,6 +30,11 @@
 
     <!-- The retro-board div follows here -->
     <div class="retro-board" id = "board-4step">
+        <div id="pdf-header" style="display: none;">
+            <h1>Sprint Retrospective Board</h1>
+            <p>Page URL: <span id="page-url"></span></p>
+          </div>
+          
         <div class="retro-section" id="appreciate">
             <h2>Let's appreciate others</h2>
             <div class="add-note" onclick="addStickyNoteToSection('appreciate')">+</div>
@@ -47,6 +58,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script type="text/javascript">
         var boardId = "{{ board_id }}";
     </script>

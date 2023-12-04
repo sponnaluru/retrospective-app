@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="icon-container">
+        <a href="/" class="icon-link">
+            <img src="{{ url_for('static', filename='images/home.PNG') }}" alt="Home" class="button-icon">
+        </a>
+        <h2>Sprint Retrospective Board</h2>
+        <a href="javascript:void(0);" onclick="exportToPDF()" class="icon-link">
+            <img src="{{ url_for('static', filename='images/pdf.PNG') }}" alt="Export to PDF" class="button-icon">
+        </a>
+    </div>
     <div class="board-description">
-        <div class="home-button-container">
-            <button onclick="location.href='/'">Home</button>
-        </div>
         <h2>Start Stop Continue Retrospective</h2>
         <p>This retrospective board enables a straightforward review of team practices with three clear prompts:</p>
         <ul>
@@ -22,6 +28,11 @@
     </div>    
 
     <div class="retro-board" id="board-startStopContinue">
+        <div id="pdf-header" style="display: none;">
+            <h1>Sprint Retrospective Board</h1>
+            <p>Page URL: <span id="page-url"></span></p>
+          </div>
+
         <div class="retro-section" id="start">
             <h2>Start</h2>
             <div class="add-note" onclick="addStickyNoteToSection('start')">+</div>
@@ -40,6 +51,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <script type="text/javascript">
         var boardId = "{{ board_id }}";
     </script>

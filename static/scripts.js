@@ -118,6 +118,26 @@ function enableDropZones() {
     });
 }
 
+function exportToPDF() {
+    var element = document.querySelector('.retro-board');
+    var header = document.getElementById('pdf-header');
+    var urlSpan = document.getElementById('page-url');
+    urlSpan.textContent = window.location.href; // Set the current URL
+    header.style.display = 'block'; // Make the header visible for the PDF
+  
+    var opt = {
+      margin: 1,
+      filename: 'retrospective.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, logging: true, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+  
+    html2pdf().from(element).set(opt).save().then(function() {
+      header.style.display = 'none'; // Hide the header again after exporting
+    });
+  }
+
 var socket = io.connect(window.location.origin);
 
 socket.on('connect', function () {
