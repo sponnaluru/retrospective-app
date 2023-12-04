@@ -20,37 +20,44 @@ function createStickyNote(id, content, sectionId) {
     stickyNote.id = id;
     stickyNote.setAttribute('data-section-id', sectionId);
 
-    const deleteButton = document.createElement('button');
-    deleteButton.innerText = 'X';
-    deleteButton.className = 'delete-button';
-    deleteButton.onclick = function() {
+    // Create delete button
+    var deleteBtn = document.createElement('span');
+    deleteBtn.innerHTML = '&times;'; 
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.onclick = function() {
         if (confirm('Are you sure you want to delete this note?')) {
             socket.emit('delete_sticky_note', { id: id, board_id: boardId });
         }
     };
+    stickyNote.appendChild(deleteBtn);
 
-    stickyNote.appendChild(deleteButton);
+    // Create a container for the content and add it to the sticky note
+    var contentContainer = document.createElement('div');
+    contentContainer.innerHTML = content;
+    stickyNote.appendChild(contentContainer);
 
-    stickyNote.addEventListener('dragstart', function (event) {
+    // Drag start event listener
+    stickyNote.addEventListener('dragstart', function(event) {
         event.dataTransfer.setData('text/plain', stickyNote.id);
     });
 
-    stickyNote.innerHTML = content;
-
-    stickyNote.addEventListener('focus', function (event) {
-        if (stickyNote.innerHTML.trim() === 'Add your comments') {
-            stickyNote.innerHTML = '<div>•&nbsp;</div>';
-            setCaretToEnd(stickyNote);
+    // Focus event listener
+    stickyNote.addEventListener('focus', function(event) {
+        if (contentContainer.innerHTML.trim() === 'Add your comments') {
+            contentContainer.innerHTML = '<div>•&nbsp;</div>';
+            setCaretToEnd(contentContainer);
         }
     });
 
-    stickyNote.addEventListener('blur', function (event) {
-        if (!stickyNote.textContent.trim()) {
-            stickyNote.innerHTML = 'Add your comments';
+    // Blur event listener
+    stickyNote.addEventListener('blur', function(event) {
+        if (!contentContainer.textContent.trim()) {
+            contentContainer.innerHTML = 'Add your comments';
         }
     });
 
-    stickyNote.addEventListener('keydown', function (event) {
+    // Keydown event listener
+    stickyNote.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault();
             var selection = window.getSelection();
@@ -68,10 +75,11 @@ function createStickyNote(id, content, sectionId) {
         }
     });
 
+    // Input event listener
     stickyNote.addEventListener('input', function(event) {
         socket.emit('update_sticky_note', { 
             id: stickyNote.id, 
-            content: stickyNote.innerHTML, 
+            content: contentContainer.innerHTML, 
             board_id: boardId, 
             section_id: sectionId 
         });
@@ -158,10 +166,22 @@ function deleteStickyNote(noteId) {
     socket.emit('delete_sticky_note', { id: noteId, board_id: boardId });
 }
 
+function setupDeleteButtonListeners() {
+    var deleteButtons = document.querySelectorAll('.delete-note');
+    deleteButtons.forEach(function(button) {
+        button.onclick = function() {
+            var noteId = button.getAttribute('data-note-id');
+            if (confirm('Are you sure you want to delete this note?')) {
+                socket.emit('delete_sticky_note', { id: noteId, board_id: boardId });
+            }
+        };
+    });
+}
+
 socket.on('sticky_note_deleted', function(data) {
-    const note = document.getElementById(data.id);
-    if (note) {
-        note.remove();
+    const noteToDelete = document.getElementById(data.id);
+    if (noteToDelete) {
+        noteToDelete.remove();
     }
 });
 
@@ -178,4 +198,5 @@ socket.on('sticky_note_section_updated', function(data) {
 
 window.onload = function () {
     enableDropZones();
+    setupDeleteButtonListeners();
 };

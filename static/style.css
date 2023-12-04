@@ -157,6 +157,7 @@ h3 {
     width: 200px;
     resize: both;
     overflow: auto;
+    position: relative;
 }
 
 
@@ -283,20 +284,27 @@ button:hover {
 
 }
 
-.delete-note-btn {
+.delete-btn {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    border: none;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    top: 0;
+    right: 0;
+    padding: 4px; /* Adjust padding as necessary */
+    background-color: transparent; /* Clear any background */
+    color: #000; /* Change as needed */
     cursor: pointer;
-    text-align: center;
-    line-height: 20px;
-    font-size: 14px;
+    font-weight: bold;
+    font-size: 14px; /* Adjust font-size as necessary */
+    user-select: none; /* Prevent text selection */
+    border: none; /* Remove border if any */
+    display: inline-block; /* Aligns better with the text */
+    text-decoration: none; /* Removes underline if it's an anchor tag */
+    z-index: 10; /* Ensure the X is above other elements */
+}
+
+.delete-btn:hover {
+    color: red; /* Change as needed */
+    background-color: transparent; /* Ensures no background color on hover */
+    text-decoration: none; /* Ensure no underline on hover */
 }
 
 
