@@ -403,4 +403,8 @@ button:hover {
     text-align: center;
     margin-bottom: 20px;
   }
+
+  #page-url {
+    font-size: 12px;
+  }
   
