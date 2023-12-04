@@ -306,28 +306,6 @@ button:hover {
     text-decoration: none; /* Ensure no underline on hover */
 }
 
-
-/* Unique backgrounds for each board type */
-#board-4step {
-    background-image: url('path-to-4step-background.jpg');
-}
-
-#board-starfish {
-    background-image: url('path-to-starfish-background.jpg');
-}
-
-#board-sailboat {
-    background-image: url('path-to-sailboat-background.jpg');
-}
-
-#board-plusDelta {
-    background-image: url('path-to-plusDelta-background.jpg');
-}
-
-#board-startStopContinue {
-    background-image: url('path-to-startStopContinue-background.jpg');
-}
-
 button {
     padding: 5px 10px;
     background-color: #4CAF50; /* or any color you prefer */
